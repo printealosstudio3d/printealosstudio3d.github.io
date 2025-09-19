@@ -396,10 +396,10 @@
         <a href="#sobre">Nosotros</a>
         <a href="#contacto">Contacto</a>
         <div class="social-icons">
-          <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram" data-tooltip="Instagram">
+          <a href="https://www.instagram.com/printealosstudio3d?igsh=bTR5MXN2NHdya3pq" target="_blank" aria-label="Instagram" data-tooltip="Instagram">
             <img src="instagram.png" alt="Instagram">
           </a>
-          <a href="https://www.tiktok.com/" target="_blank" aria-label="TikTok" data-tooltip="TikTok">
+          <a href="https://www.tiktok.com/@printealosstudio3d?_t=ZN-8zpIkae88Ri&_r=1" target="_blank" aria-label="TikTok" data-tooltip="TikTok">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
               <path d="M448,209.9a210,210,0,0,1-122.77-39.65V352.37a159.94,159.94,0,1,1-139-158.39v81.66a79.94,79.94,0,1,0,57.87,76.73V0h81.13a127,127,0,0,0,1.13,16.66A128.05,128.05,0,0,0,448,144.13Z"/>
             </svg>
@@ -418,6 +418,7 @@
   </section>
 
   <script>
+    // Slider de imágenes
     const heroImages = ['sileder1.png', 'sileder2.png', 'sileder3.png'];
     let currentHero = 0;
     const heroImg = document.getElementById('hero-image');
@@ -430,6 +431,18 @@
         heroImg.style.opacity = 1;
       }, 500);
     }, 5000);
+
+    // Cerrar menú al hacer clic en cualquier enlace
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('open');
+      });
+    });
+
+    // Mensaje de bienvenida
+    window.addEventListener("load", () => {
+      alert("👋 ¡Bienvenido a Printéalos 3D! Gracias por visitarnos 🚀");
+    });
   </script>
 
   <section id="servicios">
@@ -501,7 +514,7 @@
   </footer>
 
   <!-- Botón WhatsApp flotante con PNG -->
-  <a href="https://wa.me/34600000000" 
+  <a href="https://wa.me/34611412562" 
      class="whatsapp-float" 
      target="_blank" 
      aria-label="WhatsApp"
