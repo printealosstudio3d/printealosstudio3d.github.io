@@ -11,10 +11,10 @@
   <style>
     :root {
       --bg: #ffffff;
-      --primary: linear-gradient(90deg, #e40303, #ff8c00, #ffed00, #008026, #004dff, #750787);
-      --accent: #ff8c00;
+      --primary: #0a2f5c;
+      --accent: #f47c20;
       --text: #333333;
-      --light: #fafafa;
+      --light: #f5f5f5;
       --shadow: rgba(0, 0, 0, 0.05);
     }
 
@@ -33,7 +33,7 @@
 
     header {
       width: 100%;
-      background: var(--primary);
+      background-color: var(--primary);
       box-shadow: 0 2px 6px var(--shadow);
       position: fixed;
       top: 0;
@@ -66,7 +66,6 @@
       color: #fff;
       font-weight: 800;
       font-size: 1.4rem;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
     }
 
     .nav-toggle {
@@ -97,7 +96,7 @@
     }
 
     .nav-links a:hover {
-      color: #ffed00;
+      color: var(--accent);
     }
 
     .social-icons {
@@ -106,16 +105,59 @@
       align-items: center;
     }
 
-    .social-icons img,
-    .social-icons svg {
-      width: 24px;
-      height: 24px;
-      transition: transform 0.3s;
+    .social-icons a {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .social-icons a:hover img,
+    /* Estilo para PNG de Instagram */
+    .social-icons img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      filter: brightness(0) invert(1); /* blanco */
+      transition: transform 0.3s, filter 0.3s;
+    }
+
+    .social-icons a:hover img {
+      transform: scale(1.2);
+      filter: brightness(1) invert(0.5) sepia(1) hue-rotate(-20deg) saturate(5);
+    }
+
+    .social-icons a svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+      transition: transform 0.3s, fill 0.3s;
+    }
+
     .social-icons a:hover svg {
-      transform: scale(1.2) rotate(10deg);
+      transform: scale(1.2);
+      fill: var(--accent);
+    }
+
+    /* Tooltip en redes del header */
+    .social-icons a::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: -30px;
+      background: #000;
+      color: #fff;
+      font-size: 0.75rem;
+      padding: 4px 8px;
+      border-radius: 5px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      transform: translateY(5px);
+      white-space: nowrap;
+    }
+
+    .social-icons a:hover::after {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .hero {
@@ -133,7 +175,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.4);
+      background: rgba(0,0,0,0.5);
       z-index: 1;
     }
 
@@ -146,10 +188,6 @@
     .hero h1 {
       font-size: 3rem;
       margin-bottom: 1rem;
-      background: var(--primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
     }
 
     .hero p {
@@ -168,9 +206,7 @@
       font-size: 2rem;
       text-align: center;
       margin-bottom: 2rem;
-      background: var(--primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--primary);
     }
 
     .grid {
@@ -183,19 +219,18 @@
     .card {
       background: #fff;
       padding: 20px;
-      border-radius: 12px;
+      border-radius: 10px;
       text-align: center;
       transition: 0.3s;
-      border: 3px solid transparent;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      border: 2px solid transparent;
     }
 
     .card:hover {
-      border: 3px solid;
-      border-image: var(--primary) 1;
+      border: 2px solid var(--accent);
       transform: translateY(-5px);
     }
 
+    /* Servicios y Proyectos: imágenes enteras con borde lateral */
     #servicios .card img,
     #proyectos .card img {
       width: 100%;
@@ -206,6 +241,11 @@
       display: block;
       margin: 0 auto 1rem;
       border-radius: 8px;
+    }
+
+    #servicios .card p,
+    #proyectos .card p {
+      font-weight: bold;
     }
 
     #sobre {
@@ -234,25 +274,23 @@
 
     button {
       padding: 1rem 2rem;
-      background: var(--primary);
+      background-color: var(--primary);
       color: white;
       font-weight: bold;
       border: none;
       border-radius: 8px;
       cursor: pointer;
       font-family: 'Poppins', sans-serif;
-      transition: 0.3s;
     }
 
     button:hover {
-      filter: brightness(1.1);
-      transform: scale(1.05);
+      background: var(--accent);
     }
 
     footer {
       text-align: center;
       padding: 2rem;
-      background: var(--primary);
+      background-color: var(--primary);
       color: #fff;
       font-size: 0.9rem;
       margin-top: 4rem;
@@ -264,25 +302,60 @@
       bottom: 20px;
       right: 20px;
       z-index: 999;
-      background: linear-gradient(135deg,#25D366,#128C7E);
+      background-color: #25D366;
       padding: 0.8rem;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0.9;
-      transition: all 0.3s;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: opacity 0.3s ease-in-out, transform 0.2s;
     }
 
     .whatsapp-float:hover {
       opacity: 1;
-      transform: scale(1.1) rotate(10deg);
+      transform: scale(1.1);
     }
 
     .whatsapp-float img {
       width: 28px;
       height: 28px;
+    }
+
+    .whatsapp-float::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      right: 60px;
+      background: #25D366;
+      color: #fff;
+      font-size: 0.8rem;
+      padding: 4px 8px;
+      border-radius: 5px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
+      transform: translateX(5px);
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .whatsapp-float::before {
+      content: "";
+      position: absolute;
+      right: 50px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: transparent transparent transparent #25D366;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .whatsapp-float:hover::after,
+    .whatsapp-float:hover::before {
+      opacity: 1;
+      transform: translateX(0) translateY(-50%);
     }
 
     @media (max-width: 768px) {
@@ -327,7 +400,7 @@
             <img src="instagram.png" alt="Instagram">
           </a>
           <a href="https://www.tiktok.com/@printealosstudio3d?_t=ZN-8zpIkae88Ri&_r=1" target="_blank" aria-label="TikTok" data-tooltip="TikTok">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="#fff">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
               <path d="M448,209.9a210,210,0,0,1-122.77-39.65V352.37a159.94,159.94,0,1,1-139-158.39v81.66a79.94,79.94,0,1,0,57.87,76.73V0h81.13a127,127,0,0,0,1.13,16.66A128.05,128.05,0,0,0,448,144.13Z"/>
             </svg>
           </a>
@@ -345,6 +418,7 @@
   </section>
 
   <script>
+    // Slider de imágenes
     const heroImages = ['sileder1.png', 'sileder2.png', 'sileder3.png'];
     let currentHero = 0;
     const heroImg = document.getElementById('hero-image');
@@ -358,14 +432,16 @@
       }, 500);
     }, 5000);
 
+    // Cerrar menú al hacer clic en cualquier enlace
     document.querySelectorAll('.nav-links a').forEach(link => {
       link.addEventListener('click', () => {
         document.querySelector('.nav-links').classList.remove('open');
       });
     });
 
+    // Mensaje de bienvenida
     window.addEventListener("load", () => {
-      alert("🌈 ¡Bienvenido a Printéalos 3D! Inclusión, creatividad y tecnología 🚀");
+      alert("👋 ¡Bienvenido a Printéalos 3D! Gracias por visitarnos 🚀");
     });
   </script>
 
@@ -416,9 +492,9 @@
   <section id="sobre">
     <h2>Sobre Nosotros</h2>
     <p>
-      En <strong>Printéalos 3D</strong> creemos en la diversidad, la creatividad y la innovación.  
-      Ofrecemos soluciones personalizadas en prototipado, diseño y fabricación aditiva 
-      para empresas y particulares, celebrando siempre la inclusión y el orgullo 🌈.
+      En <strong>Printéalos 3D</strong> somos especialistas en impresión 3D, apasionados por la innovación tecnológica 
+      y por dar forma a tus ideas. Ofrecemos soluciones personalizadas en prototipado, diseño y fabricación aditiva 
+      para empresas y particulares.
     </p>
   </section>
 
@@ -434,9 +510,10 @@
   </section>
 
   <footer>
-    <p>© 2025 Printéalos 3D - Orgullosamente inclusivos 🌈</p>
+    <p>© 2025 Printéalos 3D - Todos los derechos reservados</p>
   </footer>
 
+  <!-- Botón WhatsApp flotante con PNG -->
   <a href="https://wa.me/34611412562" 
      class="whatsapp-float" 
      target="_blank" 
